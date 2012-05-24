@@ -1,0 +1,3 @@
+file = File.open("test_symbol.swf")
+swf = SWF.new(file)
+swf.create_movieclip("TestSymbol")
