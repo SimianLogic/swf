@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+libs =  " -r irb/completion"
+
+Dir['./**/*.rb'].each do |f| 
+  libs <<  " -r #{f}"
+end
+
+exec "irb #{libs} --simple-prompt"
