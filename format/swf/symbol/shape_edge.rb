@@ -20,12 +20,13 @@ class ShapeEdge
   end
 
   def connects(edge)
-    fill_style == edge.fill_style && (@x1 - edge.x0).abs < 0.00001 && (@y1 - edge.y0).abs < 0.00001
+    @fill_style == edge.fill_style && (@x1 - edge.x0).abs < 0.00001 && (@y1 - edge.y0).abs < 0.00001
   end
 	
 	def self.curve(style, x0, y0, cx, cy, x1, y1)
 
-	  result = ShapeEdge.new	  
+	  result = ShapeEdge.new	 
+	  result.fill_style = style 
 	  result.x0 = x0
 		result.y0 = y0
 		result.cx = cx
@@ -38,7 +39,8 @@ class ShapeEdge
 	end
 	
 	def dump
-	  puts (x0 + "," + y0 + " -> " + x1 + "," + y1 + " (" + fillStyle + ")" );
+	  puts "#{@x0}, #{@y0} -> #{@x1}, #{@y1} (#{@fill_style})"
+	  #puts (@x0 + "," + @y0 + " -> " + @x1 + "," + @y1 + " (" + @fill_style + ")" );
 	end
 
   def self.line(style, x0, y0, x1, y1)

@@ -197,7 +197,8 @@ class Shape
 	  fills_left = fills.length
 	  
 	  while fills_left > 0
-	    first = fills[0]
+
+	    first = fills[0]	    
 	    fills_left -= 1
 	    fills[0] = fills[fills_left]
 	    
@@ -234,7 +235,7 @@ class Shape
         if !found
           p "Remaining: "
           fills.map &:dump			  
-				  raise "Daingling fill: #{prev.x1},#{prev.y1} #{prev.fill_style}"
+				  raise "Dangling fill: #{prev.x1},#{prev.y1} #{prev.fill_style}"
 					break
 				end	
 			end	
