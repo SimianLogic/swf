@@ -8,7 +8,7 @@ class DisplayAttributes
     object.name = @name
     object.filters = filters if object.filters != filters
     
-    object.set_ratio(ratio) if(ratio != nil && object.is_a?MorphObject)
+    object.set_ratio(ratio) if(ratio != nil && object.is_a?(MorphObject))
       
     false
   end
