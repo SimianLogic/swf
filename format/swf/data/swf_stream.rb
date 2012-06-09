@@ -303,8 +303,7 @@ class SwfStream
   end
   
   def read_matrix
-    #TODO: MATRIX
-    #result = Matrix.new
+
     align_bits
     
     has_scale = read_bool
@@ -323,8 +322,7 @@ class SwfStream
     tx = read_twips(trans_bits)
     ty = read_twips(trans_bits)
     
-    p "TODO: RETURN A MATRIX"
-    return nil
+    Matrix2D.new(a,b,c,d,tx,ty)
   end
   
   def read_pascal_string
@@ -340,7 +338,7 @@ class SwfStream
   end
 
   def read_rect
-    #TODO: RECTANGLE
+
     align_bits
     bits = read_bits(5)
     x0 = read_twips(bits)

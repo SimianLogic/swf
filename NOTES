@@ -1,0 +1,15 @@
+
+All the drawing commands are implemented with procs... i.e.
+
+  Proc.new{ |graphics| graphics.move_to(x,y) }
+  
+This should allow for swapping in any rendering engine.
+
+
+
+No plan yet on how to replace the display tree (mostly focused on drawing right now), so here are some worries:
+  MorphObject is supposed to extend Sprite (but I have no Sprite yet)
+  MorphObject is supposed to have a graphics object (a la Sprite, I assume)
+  
+  
+  
