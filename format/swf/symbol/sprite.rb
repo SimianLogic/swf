@@ -40,7 +40,7 @@ class Sprite
       
       color_transform = stream.read_color_transform(false) if stream.get_bytes_left > 0
         
-      frame.place(symbol_id, symbol, depth, matrix, color_transform, nil, nil, nil)
+      @frame.place(symbol_id, symbol, depth, matrix, color_transform, nil, nil, nil)
       
     elsif (version == 2 || version == 3)
       stream.align_bits
@@ -119,12 +119,12 @@ class Sprite
       
       if move
         if has_symbol
-          frame.place(symbol_id, swf.get_symbol(symbol_id), depth, matrix, color_transform, ratio, name, filters)
+          @frame.place(symbol_id, swf.get_symbol(symbol_id), depth, matrix, color_transform, ratio, name, filters)
         else
-          frame.move(depth, matrix, color_transform, ratio)
+          @frame.move(depth, matrix, color_transform, ratio)
         end
       else
-        frame.place(symbol_id, swf.get_symbol(symbol_id), depth, matrix, color_transform, ratio, name, filters)
+        @frame.place(symbol_id, swf.get_symbol(symbol_id), depth, matrix, color_transform, ratio, name, filters)
       end
           
     else
@@ -136,12 +136,12 @@ class Sprite
     stream.read_id if version == 1
     
     depth = stream.read_depth
-    frame.remvoe(depth)
+    @frame.remove(depth)
   end
   
   def show_frame
-    frames << frame
-    frame = Frame.new(frame)
+    @frames << @frame
+    @frame = Frame.new(@frame)
   end
   
 end

@@ -45,8 +45,8 @@ class SWF
     @stream_positions = {}
     
     dimensions = @stream.read_rect
-    @width = dimensions[2]
-    @height = dimensions[3]
+    @width = dimensions.width
+    @height = dimensions.height
     @frame_rate = @stream.read_frame_rate
     
     @stream_positions[0] = @stream.position

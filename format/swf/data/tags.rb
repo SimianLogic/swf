@@ -1,6 +1,6 @@
 class Tags
   TAG_END                   = 0
-  SHOWFRAME                 = 1
+  SHOW_FRAME                = 1
   DEFINE_SHAPE              = 2
   FREE_CHARACTER            = 3
   PLACE_OBJECT              = 4

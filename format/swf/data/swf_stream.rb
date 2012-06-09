@@ -192,7 +192,7 @@ class SwfStream
     StringIO.new(@stream.read(length))
   end
   
-  def read_cap_style
+  def read_caps_style
     cap = read_bits(2)
     
     return "ROUND" if cap == 0
@@ -348,8 +348,7 @@ class SwfStream
     y0 = read_twips(bits)
     y1 = read_twips(bits)
     
-    p "TODO: return rectangle"
-    return [x0,y0,x1-x0,y1-y0]
+    Rectangle.new(x0,y0,x1-x0,y1-y0)
   end
   
   def read_rgb

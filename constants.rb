@@ -13,3 +13,9 @@ class BlendMode
   OVERLAY     = "overlay"
   HARDLIGHT   = "hardlight"
 end
+
+class JointStyle
+  BEVEL       = "bevel"
+  MITER       = "miter"
+  ROUND       = "round"
+end
