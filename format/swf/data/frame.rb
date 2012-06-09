@@ -32,7 +32,7 @@ class Frame
   
   def place(symbol_id, symbol, depth, matrix, color_transform, ratio, name, filters)
     previous_object = @objects[depth]
-    if previous_object.nil?
+    unless previous_object.nil?
       if matrix.nil?
         matrix = previous_object.attributes[0].matrix
       end
