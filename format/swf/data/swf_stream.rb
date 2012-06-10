@@ -99,6 +99,7 @@ class SwfStream
     
     @tag_size = length
     @tag_read = 0
+    
     return tag
   end
   
@@ -116,7 +117,7 @@ class SwfStream
   end
   
   def pop_tag
-    @tag_read = @push_tag_size
+    @tag_read = @push_tag_read
     @tag_size = @push_tag_size
   end
   
@@ -165,6 +166,7 @@ class SwfStream
 	  while (bits_left != 0)
 	    if @bit_position == 0
 	      @byte_buffer = @stream.read_unsigned_byte
+	      "180 - tag_read++"
 	      @tag_read += 1
 	      @bit_position = 8
       end
@@ -387,10 +389,6 @@ class SwfStream
     return "PAD" if sm == 3
     
     "REPEAT"
-  end
-  
-  def hello
-    p "HELLO"
   end
   
   def read_string
