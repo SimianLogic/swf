@@ -23,7 +23,8 @@ class Sprite
     @cache_as_bitmap = false
     @classname = nil
     @frame = Frame.new
-    @name = "Sprite#{id}"    
+    @name = "Sprite#{id}"
+    
   end
   
   def label_frame(name)
@@ -39,7 +40,7 @@ class Sprite
       color_transform = nil
       
       color_transform = stream.read_color_transform(false) if stream.get_bytes_left > 0
-        
+      
       @frame.place(symbol_id, symbol, depth, matrix, color_transform, nil, nil, nil)
       
     elsif (version == 2 || version == 3)
@@ -130,6 +131,8 @@ class Sprite
     else
       raise "Place object not implemented: #{version}"  
     end
+    
+    nil
   end
   
   def remove_object(stream, version)
@@ -140,6 +143,7 @@ class Sprite
   end
   
   def show_frame
+    p "SHOW FRAME"
     @frames << @frame
     @frame = Frame.new(@frame)
   end

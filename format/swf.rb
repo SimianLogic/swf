@@ -95,8 +95,7 @@ class SWF
     end
     
     if maybe_mc = get_symbol(id)
-      #TODO: figure out if maybe_mc is a movieclip
-      #TODO: create an "instance" of MovieClip and return it
+      return MovieClip.new(maybe_mc)
     end
     
     return nil
@@ -113,8 +112,11 @@ class SWF
   def get_symbol(id)
     raise "INVALID SYMBOL ID #{id}" if @stream_positions[id].nil?
     
+    p "FETCH SYMBOL: #{id}"
+    
     if @symbol_data[id].nil?
       cache_position = @stream.position
+      p "PUSH TAG"
       @stream.push_tag
       
       @stream.position = @stream_positions[id]
@@ -199,31 +201,45 @@ class SWF
   end
   
   def read_sprite(is_stage)
+    p "READ SPRITE"
+    p @stream.position
     id = is_stage ? 0 : @stream.read_id
+    p "MY ID IS #{id}"
+    p @stream.position
     sprite = Sprite.new(self, id, @stream.read_frames)
+    p "SPRITE SHOULD HAVE #{sprite.frame_count} FRAMES"
     
     tag = 0
-    while((tag = @stream.begin_tag) != 0)
-      case(tag)
-      when Tags::FRAME_LABEL then sprite.label_frame(@stream.read_string)
-      when Tags::SHOW_FRAME then sprite.show_frame
-        
-      when Tags::PLACE_OBJECT  then sprite.place_object(@stream, 1)
-      when Tags::PLACE_OBJECT2 then sprite.place_object(@stream, 2)
-      when Tags::PLACE_OBJECT3 then sprite.place_object(@stream, 3)
-
-      when Tags::REMOVE_OBJECT  then sprite.remove_object(@stream, 1)
-      when Tags::REMOVE_OBJECT2 then sprite.remove_object(@stream, 2)
-        
-      when Tags::DO_ACTION
+    p "Starting tags: #{@stream.position}"
+    while((tag = @stream.begin_tag) != 0)    
+      p "SPRITE TAG: #{tag} = #{Tags::string(tag)}"
+      p @stream.position
+      if tag == Tags::FRAME_LABEL
+        sprite.label_frame(@stream.read_string) 
+      elsif tag == Tags::SHOW_FRAME
+        sprite.show_frame 
+      elsif tag == Tags::PLACE_OBJECT
+        sprite.place_object(@stream, 1) 
+      elsif tag == Tags::PLACE_OBJECT2
+        sprite.place_object(@stream, 2) 
+        p @stream.position
+      elsif tag == Tags::PLACE_OBJECT3
+        sprite.place_object(@stream, 3) 
+      elsif tag == Tags::REMOVE_OBJECT
+        sprite.remove_object(@stream, 1) 
+      elsif tag == Tags::REMOVE_OBJECT2        
+        sprite.remove_object(@stream, 2) 
+      elsif tag == Tags::DO_ACTION
         #not implemented
-      when Tags::PROTECT
+      elsif tag == Tags::PROTECT
         #ignored
       else
-        p "unknown subTag: #{Tags::tag[tag]} (#{tag})" unless is_stage
+        p "Unknown subTag: #{Tags::tag[tag]} (#{tag})" unless is_stage
       end #end case
       
+      p @stream.position
       @stream.end_tag
+      p "now #{@stream.position}"
     end #end while
     
     @symbol_data[id] = sprite

@@ -1,3 +1,9 @@
+TODO: whenever it's Shape.new, it meant Flash.Display.Shape and NOT my Shape. Should convert Shape to ShapeDefinition to avoid ambiguity and then figure out what the heck to do about Shape
+
+
+TODO: purge everything in Symbol.hx -- it's just an enum for checking symbol types
+just use ruby's .is_a?
+--it seems as though the types are definition types (i.e. MovieClipDefinition), maybe not the display classes
 
 All the drawing commands are implemented with procs... i.e.
 
@@ -11,5 +17,11 @@ No plan yet on how to replace the display tree (mostly focused on drawing right 
   MorphObject is supposed to extend Sprite (but I have no Sprite yet)
   MorphObject is supposed to have a graphics object (a la Sprite, I assume)
   
+  MovieClip is supposed to extend Sprite (and have a graphics object)
   
-  
+
+MovieClip makes use of ENTER_FRAME events for playing... need to figure out how to do that one
+MovieClip calls add_child and remove_child...
+StaticText needs to render
+Sprite needs to render
+Shape needs to render

@@ -1,11 +1,13 @@
 class Frame
-  attr_accessor :frame
+
+  attr_accessor :frame, :objects
   
   #static props/methods
   class << self
   end
   
   def initialize(previous_frame=nil)
+    
     @objects = {}
     #init our objects hash with the pre-existing positions
     if previous_frame.nil?
@@ -19,7 +21,7 @@ class Frame
   end
   
   #just to keep method parity...
-  def copyObjectSet
+  def copy_object_set
     @objects.clone
   end
   
